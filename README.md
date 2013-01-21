@@ -3,6 +3,9 @@ azure-scripty
 
 Azure automation made easy. 
 
+[![Build Status](https://travis-ci.org/glennblock/azure-scripty.png)](https://travis-ci.org/glennblock/azure-scripty)
+
+
 azure-scripty is a little helper library that makes it really easy to create node automation scripts using the azure-cli.
 
 # Features
