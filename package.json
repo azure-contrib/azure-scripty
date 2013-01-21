@@ -1,0 +1,42 @@
+{
+  "name": "azure-cli-buddy",
+  "version": "0.0.1",
+  "description": "Helper library for scripting the azure-cli",
+  "main": "index.js",
+  "licenses": [
+    {
+      "type": "Apache",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "azure-cli": "~0.6.10",
+    "async": "~0.1.22",
+    "winston": "~0.6.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "jshint": "*",
+    "should": "*"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/glennblock/azure-cli-buddy.git"
+  },
+  "homepage": "https://github.com/glennblock/azure-cli-buddy",
+  "keywords": [
+    "azure",
+    "cloud",
+    "bash"
+  ],
+  "author": "Glenn Block",
+  "license": "Apache 2",
+  "readmeFilename": "README.md",
+  "gitHead": "7d1e4545e21d859a0ed5c8a83b61d3fe09d16d24"
+}
