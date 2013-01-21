@@ -57,8 +57,24 @@ describe 'invoke', ->
         errors=['error']
         expectedCmds = ['foo bar3']
         buddy.invoke 'foo bar3', obj.complete   
-
+  
   describe 'when passing multiple commands', ->
+    it 'should invoke the completion callback', (done) ->
+      obj={
+        complete: (err, results) ->
+          done()
+      }
+
+      results = []
+      errors=[]
+      expectedCmds = ['foo bar4', 'foo bar5'].reverse()
+
+      cmds = ['foo bar4', 'foo bar5']
+
+      buddy.invoke cmds, obj.complete
+
+
+  describe 'when passing multiple command objects', ->
     it 'should invoke each step callback', (done) ->
       invoked=0
       obj = {
