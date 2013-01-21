@@ -63,10 +63,10 @@ var cmds=[
 scripty.invoke(cmds, steps.complete);
 ````
 
-## What's next
+# What's next
 * Add piping syntax to allow piping results, i.e. feeding the results of "site list" into "site config".
 
-## License
+# License
 
 Apache 2: http://www.apache.org/licenses/LICENSE-2.0.html
 
