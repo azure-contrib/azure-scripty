@@ -3,6 +3,8 @@ azure-scripty
 
 Azure automation made easy. 
 
+azure-scripty is a little helper library that makes it really easy to create node automation scripts using the azure-cli.
+
 # Features
 * Invoke one or more CLI commands easily from within your code.
 * Supports all CLI commands, if you know the CLI you know scripty!
