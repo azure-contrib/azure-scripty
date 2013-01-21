@@ -9,6 +9,7 @@ azure-scripty is a little helper library that makes it really easy to create nod
 * Invoke one or more CLI commands easily from within your code.
 * Supports all CLI commands, if you know the CLI you know scripty!
 * Returns JSON objects from each cmd. Useful for complex scripting scenarios.
+* Cross platform, works on Windows, Mac and Linux.
 
 # Getting started
 
