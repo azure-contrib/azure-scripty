@@ -1,5 +1,5 @@
 should = require 'should'
-buddy = require '../lib/cli-buddy.js'
+buddy = require '../lib/azure-scripty.js'
 
 results = []
 expectedCmds = []
