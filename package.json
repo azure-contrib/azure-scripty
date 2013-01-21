@@ -1,8 +1,8 @@
 {
-  "name": "azure-cli-buddy",
+  "name": "azure-scripty",
   "version": "0.0.1",
-  "description": "Helper library for scripting the azure-cli",
-  "main": "index.js",
+  "description": "Azure automation made easy",
+  "main": "lib/azure-scripty.js",
   "licenses": [
     {
       "type": "Apache",
@@ -12,7 +12,6 @@
   "dependencies": {
     "azure-cli": "~0.6.10",
     "async": "~0.1.22",
-    "winston": "~0.6.2"
   },
   "devDependencies": {
     "mocha": "*",
@@ -27,9 +26,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/glennblock/azure-cli-buddy.git"
+    "url": "git://github.com/glennblock/azure-scripty.git"
   },
-  "homepage": "https://github.com/glennblock/azure-cli-buddy",
+  "homepage": "https://github.com/glennblock/azure-scripty",
   "keywords": [
     "azure",
     "cloud",
@@ -38,5 +37,4 @@
   "author": "Glenn Block",
   "license": "Apache 2",
   "readmeFilename": "README.md",
-  "gitHead": "7d1e4545e21d859a0ed5c8a83b61d3fe09d16d24"
 }
