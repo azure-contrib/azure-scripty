@@ -31,7 +31,7 @@ You can pass a collection of cmds to be called in sequence. Below for example I 
 
 ```javascript
 var scripty = require('azure-scripty');
-scripty.invoke('site create mysite --git', 'site config add foo=bar', function(err, results){
+scripty.invoke(['site create mysite --git', 'site config add foo=bar'], function(err, results){
   console.log('done')
 });
 ````
