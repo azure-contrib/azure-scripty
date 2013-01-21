@@ -16,6 +16,11 @@ azure-scripty is a little helper library that makes it really easy to create nod
 
 # Getting started
 
+## Install it
+```bash
+npm install azure-scripty
+```
+
 To use scripty, call the invoke method passing in one or more commands. Commands are the arguments that you would normally pass when calling azure-cli from the shell.
 
 ## Single command style
