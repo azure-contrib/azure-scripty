@@ -11,7 +11,8 @@
   ],
   "dependencies": {
     "azure-cli": "~0.6.10",
-    "async": "~0.1.22"
+    "async": "~0.1.22",
+    "underscore": "~1.4.3"
   },
   "devDependencies": {
     "mocha": "*",

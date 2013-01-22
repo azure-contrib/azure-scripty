@@ -12,8 +12,8 @@ buddy.exec = (cmd, callback) ->
   callback errors.pop(), results.pop()
 
 
-describe 'invoke', ->
-  describe 'when passing a single command', ->
+describe 'buddy', ->
+  describe 'when calling invoke with a single command', ->
     it 'should invoke the completion callback', (done) ->
       obj = {
         complete: (err, results) ->
@@ -58,7 +58,7 @@ describe 'invoke', ->
         expectedCmds = ['foo bar3']
         buddy.invoke 'foo bar3', obj.complete   
   
-  describe 'when passing multiple commands', ->
+  describe 'when calling invoke with multiple commands', ->
     it 'should invoke the completion callback', (done) ->
       obj={
         complete: (err, results) ->
@@ -74,7 +74,7 @@ describe 'invoke', ->
       buddy.invoke cmds, obj.complete
 
 
-  describe 'when passing multiple command objects', ->
+  describe 'when calling invoke with multiple command objects', ->
     it 'should invoke each step callback', (done) ->
       invoked=0
       obj = {
