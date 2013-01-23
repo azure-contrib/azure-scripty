@@ -49,6 +49,6 @@ describe 'parsing', ->
       it 'should return the string', (done) -> 
         cmd = parser.parseCommandToString('foo');
         cmd.should.equal 'foo'
-        done()
+        done() 
         
    

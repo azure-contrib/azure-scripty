@@ -5,14 +5,20 @@ results = []
 expectedCmds = []
 errors = []
 calls = 0;
+receivedCmds = []
 
 buddy.exec = (cmd, callback) -> 
   calls++;
+  receivedCmds.push(cmd);
   cmd.should.include expectedCmds.pop()
   callback errors.pop(), results.pop()
-
-
+  
 describe 'buddy', ->
+  # before every test
+  beforeEach (done) ->
+    calls = 0
+    done()
+
   describe 'when calling invoke with a single command', ->
     it 'should invoke the completion callback', (done) ->
       obj = {
@@ -172,4 +178,46 @@ describe 'buddy', ->
         ]
 
         buddy.invoke cmds, obj.complete
+  describe 'when calling invoke with a single command object', ->
+    it 'should make the proper call', (done) ->
+      cmd = {
+        command: 'mobile create',
+        positional: ['mymobileservice', 'sqladmin', 'myP@ssw0rd!'],
+        sqlServer: 'VMF1ASD',
+        sqlDb: 'mydb'
+      }
+      receivedCmds= [null]
+      expectedCmds=['mobile create mymobileservice sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb mydb']
+      buddy.invoke cmd, ->
+        #if it succeeds this worked as buddy.exec validates the exepcted cmd against the received cmd
+        done()
+      
+
+  describe 'when calling invoke with multiple command objects', ->
+    it 'should make the proper calls', (done) ->
+      cmds = [
+        {
+          command: 'mobile create',
+          positional: ['mymobileservice', 'sqladmin', 'myP@ssw0rd!'],
+          sqlServer: 'VMF1ASD',
+          sqlDb: 'mydb'
+        },
+        {
+          command: 'site create',
+          positional: ['site1'],
+          location: '"West US"',
+          subscription: 'foobar'
+          git:null
+        }
+      ]
+
+      receivedCmds= [null]
+      expectedCmds=[
+        'mobile create mymobileservice sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb mydb',
+        'site create site1 --location "West US" --subscription foobar --git'
+      ].reverse()
+      buddy.invoke cmds, ->
+        #if it succeeds this worked as buddy.exec validates the exepcted cmd against the received cmd
+        done()
+
 ###
