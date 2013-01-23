@@ -34,6 +34,33 @@ scripty.invoke('site list', function(err, results) {
 });
 ````
 
+## Single command object style ##
+
+You can also pass a command object where properties map to different parameters. This is useful for programattic scenarios where a function returns an object that you just pass in.
+
+* The 'Command' property holds the command name. 
+* 'Positional' is an array of values that will be added positionally at the beginning. 
+* The rest of the properties are optional and will be appended with --[Property Name] and the value i.e. --Foo Bar.
+* For quoted values, use a double quotes within the single quotes i.e. {'name':'"foo bar"'}.
+* For parameters with no value / flages i.e. --bar, the value can be left null or empty.
+
+For example passing the command below
+
+```javascript
+cmd = {
+  command: 'mobile create',
+  positional: ['mymobileservice', 'sqladmin', 'myP@ssw0rd!'],
+  sqlServer: 'VMF1ASD',
+  sqlDb: 'mydb'
+};
+buddy.invoke(cmd, function() {})
+```
+will end up with the following resulting command.
+
+```bash
+mobile create mymobileserver sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb myDB
+```
+
 ## Multi-command style
 
 You can pass a collection of cmds to be called in sequence. Below for example I am create a site and then configuring it.
@@ -46,6 +73,37 @@ scripty.invoke(['site create mysite --git', 'site config add foo=bar', 'site sho
 ````
 
 The results parameter in the callback will contain an array of all returned objects
+
+## Multi command object style ##
+
+Similar to the single command, you can also pass multiple command objects. See the example below.
+
+```javascript
+cmds = [
+  {
+    command: 'mobile create',
+    positional: ['mymobileservice', 'sqladmin', 'myP@ssw0rd!'],
+    sqlServer: 'VMF1ASD',
+    sqlDb: 'mydb'
+  },
+  {
+    command: 'site create',
+    positional: ['site1'],
+    location: '"West US"',
+    subscription: 'foobar'
+    git:null
+  }
+]
+
+buddy.invoke(cmds, function() {});
+```
+
+When this runs, the following commands will be created.
+
+```bash
+mobile create mymobileserver sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb myDB
+site create site1 --location "West US" --subscription foobar --git
+```
 
 ## Multi-command with step callbacks
 
@@ -73,6 +131,8 @@ var cmds=[
 ];
 scripty.invoke(cmds, steps.complete);
 ````
+
+This also works with command object style, so you can pass in a full command with a callback.
 
 # What's next
 * Add piping syntax to allow piping results, i.e. feeding the results of "site list" into "site config".
