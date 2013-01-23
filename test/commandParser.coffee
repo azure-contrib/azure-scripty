@@ -47,7 +47,7 @@ describe 'parsing', ->
     
     describe 'and it is a string', ->
       it 'should return the string', (done) -> 
-        cmd = parser.parseCommandToString('foo');
+        cmd = parser.parseCommandToString 'foo'
         cmd.should.equal 'foo'
         done() 
         
