@@ -137,6 +137,10 @@ This also works with command object style, so you can pass in a full command wit
 # What's next
 * Add piping syntax to allow piping results, i.e. feeding the results of "site list" into "site config".
 
+# Known issues
+
+* Some commands have required params which the cli will prompt for. If you call those cmds without passing required params the cli will prompt which causes scripty to freeze as the cli is expecting input. This will be addressed shortly.
+
 # License
 
 Apache 2: http://www.apache.org/licenses/LICENSE-2.0.html
