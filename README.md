@@ -139,7 +139,7 @@ This also works with command object style, so you can pass in a full command wit
 
 # Known issues
 
-* Some commands have required params which the cli will prompt for. If you call those cmds without passing required params the cli will prompt which causes scripty to freeze as the cli is expecting input. This will be addressed shortly.
+* Some commands have required params which the cli will prompt for ex. 'azure site create' will prompt for location. If you call those cmds without passing required params the cli will prompt which causes scripty to freeze as the cli is expecting input. This will be addressed shortly so that cmd will error if this happens. To avoid this make sure all required params are passed. You can find out which params are required by using --help, i.e. "azure site create --help"
 
 # License
 
