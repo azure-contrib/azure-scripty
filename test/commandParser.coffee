@@ -9,7 +9,10 @@ describe 'parsing', ->
       command: 'mobile create',
       positional: ['mymobileservice', 'sqladmin', 'myP@ssw0rd!'],
       sqlServer: 'VMF1ASD',
-      sqlDb: 'mydb'
+      sqlDb: 'mydb',
+      flagEmpty: '',
+      flagNull: null,
+      flagFalse: 'false'
     }
 
     parsed = parser.parseCommandToString cmd
@@ -33,6 +36,12 @@ describe 'parsing', ->
     it 'should insert the value for each optional parameter after the name', (done) ->
       params[6].should.equal 'VMF1ASD'
       params[8].should.equal 'mydb'
+      done()
+
+    it 'should insert only the parameter name for flags', (done) ->
+      params[9].should.equal '--flagEmpty'
+      params[10].should.equal '--flagNull'
+      params[11].should.equal '--flagFalse'
       done()
 
     describe 'and command is not a string', ->
