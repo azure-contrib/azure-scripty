@@ -36,7 +36,7 @@ describe 'buddy', ->
             done err
 
           try
-            results[0].should.equal 'foo'
+            results.should.equal 'foo'
           catch err
             done err
             return
