@@ -220,4 +220,18 @@ describe 'buddy', ->
         #if it succeeds this worked as buddy.exec validates the exepcted cmd against the received cmd
         done()
 
+      describe 'and using piping', ->
+        it 'should invoke the piped command for each ', (done) ->
+          cmds = [
+            'site list',
+            'site config add foo {{name}}'
+          ]
+
+          receivedCmds= [null]
+          expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
+          buddy.invoke cmds, ->
+            done()
+
+
+
 ###
