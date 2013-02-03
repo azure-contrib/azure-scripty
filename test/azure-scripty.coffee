@@ -1,5 +1,5 @@
 should = require 'should'
-buddy = require '../lib/azure-scripty.js'
+scripty = require '../lib/azure-scripty.js'
 
 results = []
 expectedCmds = []
@@ -7,13 +7,13 @@ errors = []
 calls = 0;
 receivedCmds = []
 
-buddy.exec = (cmd, callback) -> 
+scripty.exec = (cmd, callback) -> 
   calls++;
   receivedCmds.push(cmd);
   cmd.should.include expectedCmds.pop()
   callback errors.pop(), results.pop()
   
-describe 'buddy', ->
+describe 'scripty', ->
   # before every test
   beforeEach (done) ->
     calls = 0
@@ -27,7 +27,7 @@ describe 'buddy', ->
       }
       results = [null]
       expectedCmds = ['foo bar1']
-      buddy.invoke 'foo bar1', obj.complete
+      scripty.invoke 'foo bar1', obj.complete
 
     it 'should return the result object', (done) ->
       obj = {
@@ -45,7 +45,7 @@ describe 'buddy', ->
       }
       results = ['foo']
       expectedCmds = ['foo bar2']
-      buddy.invoke 'foo bar2', obj.complete      
+      scripty.invoke 'foo bar2', obj.complete      
  
     describe 'and an error occurs', ->
       it 'should return the error', (done) ->
@@ -62,7 +62,7 @@ describe 'buddy', ->
         results = ['']
         errors=['error']
         expectedCmds = ['foo bar3']
-        buddy.invoke 'foo bar3', obj.complete   
+        scripty.invoke 'foo bar3', obj.complete   
   
   describe 'when calling invoke with multiple commands', ->
     it 'should invoke the completion callback', (done) ->
@@ -77,7 +77,7 @@ describe 'buddy', ->
 
       cmds = ['foo bar4', 'foo bar5']
 
-      buddy.invoke cmds, obj.complete
+      scripty.invoke cmds, obj.complete
 
 
   describe 'when calling invoke with multiple command objects', ->
@@ -112,7 +112,7 @@ describe 'buddy', ->
         {cmd:'foo bar5', callback:obj.step2}
       ]
 
-      buddy.invoke cmds, ->  
+      scripty.invoke cmds, ->  
       
 
     it 'should invoke the completion callback', (done) ->
@@ -130,7 +130,7 @@ describe 'buddy', ->
         {cmd:'foo bar7'}
       ]
 
-      buddy.invoke cmds, obj.complete
+      scripty.invoke cmds, obj.complete
 
     it 'should pass all the results to the completion callback', (done) ->
       obj = {
@@ -152,7 +152,7 @@ describe 'buddy', ->
         {cmd:'foo bar9', callback:obj.step2}
       ]
 
-      buddy.invoke cmds, obj.complete
+      scripty.invoke cmds, obj.complete
 
     describe 'and an error occurs', ->
       it 'should stop processing and call the completion callback', (done) ->
@@ -177,7 +177,7 @@ describe 'buddy', ->
           {cmd:'foo bar11'}
         ]
 
-        buddy.invoke cmds, obj.complete
+        scripty.invoke cmds, obj.complete
   describe 'when calling invoke with a single command object', ->
     it 'should make the proper call', (done) ->
       cmd = {
@@ -188,8 +188,8 @@ describe 'buddy', ->
       }
       receivedCmds= [null]
       expectedCmds=['mobile create mymobileservice sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb mydb']
-      buddy.invoke cmd, ->
-        #if it succeeds this worked as buddy.exec validates the exepcted cmd against the received cmd
+      scripty.invoke cmd, ->
+        #if it succeeds this worked as scripty.exec validates the exepcted cmd against the received cmd
         done()
       
 
@@ -216,8 +216,8 @@ describe 'buddy', ->
         'mobile create mymobileservice sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb mydb',
         'site create site1 --location "West US" --subscription foobar --git'
       ].reverse()
-      buddy.invoke cmds, ->
-        #if it succeeds this worked as buddy.exec validates the exepcted cmd against the received cmd
+      scripty.invoke cmds, ->
+        #if it succeeds this worked as scripty.exec validates the exepcted cmd against the received cmd
         done()
 
       describe 'and using piping', ->
@@ -229,7 +229,7 @@ describe 'buddy', ->
 
           receivedCmds= [null]
           expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
-          buddy.invoke cmds, ->
+          scripty.invoke cmds, ->
             done()
 
 
