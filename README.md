@@ -42,7 +42,7 @@ You can also pass a command object where properties map to different parameters.
 * 'Positional' is an array of values that will be added positionally at the beginning. 
 * The rest of the properties are optional and will be appended with --[Property Name] and the value i.e. --Foo Bar.
 * For quoted values, use a double quotes within the single quotes i.e. {'name':'"foo bar"'}.
-* For parameters with no value / flages i.e. --bar, the value can be left null or empty.
+* For parameters which are flags i.e. --git, the value can be null, '' or 'true'.
 
 For example passing the command below
 
@@ -156,7 +156,7 @@ You can also pipe a result which is not a collection to the next call.
 Below the first call retrieves the Service Bus namespace myns and then pipes the connection string to a config setting.
 
 ```javascript
-var script = require('azure-scripty')
+var scripty = require('azure-scripty')
 scripty.invoke(['sb namespace show myns', "site config add \"conn=':ConnectionString'\" mysite"], 
   function(){});
 ```
