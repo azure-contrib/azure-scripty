@@ -5,8 +5,8 @@ _ = require 'underscore'
 describe 'piping', ->
   describe 'when calling transform', ->
   	it 'should error if piped object is null', (done) ->
-  	  cmd = 'foo'
-  	  obj = {name:"site1"}
+  	  cmd = 'prop'
+  	  obj = {prop:"value"}
   	  try
   	  	transformer.transform(cmd, null)
   	  catch e
@@ -16,8 +16,8 @@ describe 'piping', ->
   	  done(false)
 
   	it 'should error if piped object is undefined', (done) ->
-  	  cmd = 'foo'
-  	  obj = {name:"site1"}
+  	  cmd = 'prop'
+  	  obj = {prop:"value"}
   	  try
   	  	transformer.transform(cmd, undefined)
   	  catch e
@@ -28,8 +28,8 @@ describe 'piping', ->
 
   describe 'when a top level property substitution is passed in the command template', ->
   	it 'should error if substitution does not match against the piped object', (done) -> 
-      cmd = ':bar'
-      obj = {foo:"foobar"}
+      cmd = ':prop1'
+      obj = {prop:"value"}
       try
       	transformer.transform(cmd, obj)
       catch e
@@ -38,12 +38,22 @@ describe 'piping', ->
 
       done(false)
   	  
-  	it 'should replace the substition with the piped value', (done) ->
-      cmd = 'site config add foo :name'
-      obj = {name:"site1"}
+  	it 'should replace the substitution with the piped value', (done) ->
+      cmd = ':prop'
+      obj = {prop:"value"}
       result = transformer.transform(cmd, obj)
-      result.should.equal 'site config add foo site1'
+      result.should.equal 'value'
       done()
-      
+
+  describe 'when a nested property substitution is passed in the command template', ->
+  	it 'should replace the substitution with the piped value', (done) ->
+      cmd = ':child.value'
+      obj = {child:{"value":"value"}}
+      result = transformer.transform(cmd, obj)
+      result.should.equal 'value'
+      done()
+             
+
+
 
 
