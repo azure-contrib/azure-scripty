@@ -48,12 +48,18 @@ describe 'piping', ->
   describe 'when a nested property substitution is passed in the command template', ->
   	it 'should replace the substitution with the piped value', (done) ->
       cmd = ':child.value'
-      obj = {child:{"value":"value"}}
+      obj = {child:{value:"value"}}
       result = transformer.transform(cmd, obj)
       result.should.equal 'value'
       done()
              
-
+  describe 'when an nested array property substitution is passed in the command template', ->
+  	it 'should replace the substitution with the piped value for the index value specified', (done) ->
+  	  cmd = ":child.items[1].value"
+  	  obj = {child:{items:[{}, {value:"value"}]}}
+  	  result = transformer.transform(cmd, obj)
+  	  result.should.equal 'value'
+  	  done()
 
 
 
