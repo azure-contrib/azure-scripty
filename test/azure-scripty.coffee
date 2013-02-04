@@ -78,7 +78,18 @@ describe 'scripty', ->
       cmds = ['foo bar4', 'foo bar5']
 
       scripty.invoke cmds, obj.complete
-
+      
+      describe 'and using piping', ->
+        it 'should invoke the piped command for each ', (done) ->
+          cmds = [
+            'site list',
+            'site config add foo :Name'
+          ]
+          results=[[{Name:"site1"},{Name:"site2"}],null].reverse();
+          receivedCmds= []
+          expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
+          scripty.invoke cmds, ->
+            done()
 
   describe 'when calling invoke with multiple command objects', ->
     it 'should invoke each step callback', (done) ->
@@ -223,12 +234,18 @@ describe 'scripty', ->
       describe 'and using piping', ->
         it 'should invoke the piped command for each ', (done) ->
           cmds = [
-            'site list',
-            'site config add foo :name'
+            {
+              command: 'site list'
+            },
+            {
+              command: 'site config add',
+              positional: ['foo =', ':Name']
+            }
           ]
-          results=[[{name:"site1"},{name:"site2"}],null].reverse();
+          results=[[{Name:"site1"},{Name:"site2"}],null].reverse();
           receivedCmds= []
-          expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
+          expectedCmds=['site list', 'site config add foo = site1', 'site config add foo = site2'].reverse()
           scripty.invoke cmds, ->
             done()
+
 
