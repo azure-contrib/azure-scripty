@@ -156,7 +156,7 @@ You can also pipe a result which is not a collection to the next call.
 Below the first call retrieves the Service Bus namespace myns and then pipes the connection string to a config setting.
 
 ```javascript
-var script = require('azure-scripty')
+var scripty = require('azure-scripty')
 scripty.invoke(['sb namespace show myns', "site config add \"conn=':ConnectionString'\" mysite"], 
   function(){});
 ```
