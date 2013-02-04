@@ -79,17 +79,17 @@ describe 'scripty', ->
 
       scripty.invoke cmds, obj.complete
       
-      describe 'and using piping', ->
-        it 'should invoke the piped command for each ', (done) ->
-          cmds = [
-            'site list',
-            'site config add foo :Name'
-          ]
-          results=[[{Name:"site1"},{Name:"site2"}],null].reverse();
-          receivedCmds= []
-          expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
-          scripty.invoke cmds, ->
-            done()
+    describe 'and using piping', ->
+      it 'should invoke the piped command for each ', (done) ->
+        cmds = [
+          'site list',
+          'site config add foo :Name'
+        ]
+        results=[[{Name:"site1"},{Name:"site2"}],null].reverse();
+        receivedCmds= []
+        expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
+        scripty.invoke cmds, ->
+          done()
 
   describe 'when calling invoke with multiple command objects', ->
     it 'should invoke each step callback', (done) ->
@@ -231,21 +231,21 @@ describe 'scripty', ->
         #if it succeeds this worked as scripty.exec validates the exepcted cmd against the received cmd
         done()
 
-      describe 'and using piping', ->
-        it 'should invoke the piped command for each ', (done) ->
-          cmds = [
-            {
-              command: 'site list'
-            },
-            {
-              command: 'site config add',
-              positional: ['foo =', ':Name']
-            }
-          ]
-          results=[[{Name:"site1"},{Name:"site2"}],null].reverse();
-          receivedCmds= []
-          expectedCmds=['site list', 'site config add foo = site1', 'site config add foo = site2'].reverse()
-          scripty.invoke cmds, ->
-            done()
+    describe 'and using piping', ->
+      it 'should invoke the piped command for for result', (done) ->
+        cmds = [
+          {
+            command: 'site list'
+          },
+          {
+            command: 'site config add',
+            positional: ['foo =', ':Name']
+          }
+        ]
+        results=[[{Name:"site1"},{Name:"site2"}],null].reverse();
+        receivedCmds= []
+        expectedCmds=['site list', 'site config add foo = site1', 'site config add foo = site2'].reverse()
+        scripty.invoke cmds, ->
+          done()
 
 
