@@ -1,0 +1,13 @@
+*** 0.0.1 ***
+- Added initial version of scripty
+
+*** 0.0.2 ***
+- Added support for passing param values as objects (fix for #2) 
+
+*** 0.1.0 ***
+- Added declarative piping support. Supports rails like syntax for specifying piped values. Supports piping 
+    collections and single items (fix for #3)
+- Added support for passing "false" as the value for flags. (fix #7)
+- Azure-scripty no longer logs JSON response to console (fix #6)
+- Added working directory when executing commands (fix #5)
+- Results are no longer wrapped in an array for single values. (fix #4)
