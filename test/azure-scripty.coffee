@@ -219,7 +219,7 @@ describe 'scripty', ->
       scripty.invoke cmds, ->
         #if it succeeds this worked as scripty.exec validates the exepcted cmd against the received cmd
         done()
-
+###
       describe 'and using piping', ->
         it 'should invoke the piped command for each ', (done) ->
           cmds = [
@@ -231,7 +231,4 @@ describe 'scripty', ->
           expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
           scripty.invoke cmds, ->
             done()
-
-
-
 ###
