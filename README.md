@@ -109,8 +109,8 @@ site create site1 --location "West US" --subscription foobar --git
 
 An alternative style that is supported is to pass a collection of cmd objects with callbacks. Today this is useful for organizing you script into smaller functions. In the future this may allow you to do pre-processing and feed data to the next step based on the current result.
 
-````javascript
-var script = require('azure-scripty');
+```javascript
+var scripty = require('azure-scripty');
 var steps={
   sites:function(callback,result) {
     //contains just sites
@@ -134,8 +134,35 @@ scripty.invoke(cmds, steps.complete);
 
 This also works with command object style, so you can pass in a full command with a callback.
 
+## Declarative piping
+
+Scripty supports the ability to pipe results between commands. To pipe, the command having results piped in should contain substituion placeholders in the parameters. A placeholder is in the form of ':' + property name ex. ':Name'
+
+### Piping multiple results. 
+
+If a command to be piped into is immediately after a command returning a collection then the command will be called for each item in the collection. 
+
+For example in the example below the :Name property is specified for 'site stop'. Assuming 'site list' returns 2 sites 'foo' and 'bar' then 'site stop foo' and 'site stop bar' will be called.
+
+```javascript
+var scripty = require('azure-scripty');
+scripty.invoke(['site list', 'site stop :Name'], function(){});
+```
+
+### Piping single results
+
+You can also pipe a result which is not a collection to the next call.
+
+Below the first call retrieves the Service Bus namespace myns and then pipes the connection string to a config setting.
+
+```javascript
+var script = require('azure-scripty')
+scripty.invoke(['sb namespace show myns', "site config add \"conn=':ConnectionString'\" mysite"], 
+  function(){});
+```
+
 # What's next
-* Add piping syntax to allow piping results, i.e. feeding the results of "site list" into "site config".
+* Add custom filtering for collections 
 
 # Known issues
 
