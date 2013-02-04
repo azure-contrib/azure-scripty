@@ -12,7 +12,7 @@ describe 'parsing', ->
       sqlDb: 'mydb',
       flagEmpty: '',
       flagNull: null,
-      flagFalse: 'false'
+      flagTrue: 'true'
     }
 
     parsed = parser.parseCommandToString cmd
@@ -41,7 +41,7 @@ describe 'parsing', ->
     it 'should insert only the parameter name for flags', (done) ->
       params[9].should.equal '--flagEmpty'
       params[10].should.equal '--flagNull'
-      params[11].should.equal '--flagFalse'
+      params[11].should.equal '--flagTrue'
       done()
 
     describe 'and command is not a string', ->
