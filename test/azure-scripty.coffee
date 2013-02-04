@@ -211,8 +211,8 @@ describe 'scripty', ->
         }
       ]
 
-      receivedCmds= [null]
-      expectedCmds=[
+      receivedCmds = [null]
+      expectedCmds = [
         'mobile create mymobileservice sqladmin myP@ssw0rd! --sqlServer VMF1ASD --sqlDb mydb',
         'site create site1 --location "West US" --subscription foobar --git'
       ].reverse()
@@ -224,10 +224,10 @@ describe 'scripty', ->
         it 'should invoke the piped command for each ', (done) ->
           cmds = [
             'site list',
-            'site config add foo {{name}}'
+            'site config add foo :name'
           ]
-
-          receivedCmds= [null]
+          results=[[{name:"site1"},{name:"site2"}],null].reverse();
+          receivedCmds= []
           expectedCmds=['site list', 'site config add foo site1', 'site config add foo site2'].reverse()
           scripty.invoke cmds, ->
             done()
