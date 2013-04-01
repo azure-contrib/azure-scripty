@@ -47,13 +47,14 @@ You can also pass a command object where properties map to different parameters.
 For example passing the command below
 
 ```javascript
+var scripty = require('azure-scripty');
 cmd = {
   command: 'mobile create',
   positional: ['mymobileservice', 'sqladmin', 'myP@ssw0rd!'],
   sqlServer: 'VMF1ASD',
   sqlDb: 'mydb'
 };
-buddy.invoke(cmd, function() {})
+scripty.invoke(cmd, function() {})
 ```
 will end up with the following resulting command.
 
@@ -79,6 +80,7 @@ The results parameter in the callback will contain an array of all returned obje
 Similar to the single command, you can also pass multiple command objects. See the example below.
 
 ```javascript
+var scripty = require('azure-scripty');
 cmds = [
   {
     command: 'mobile create',
@@ -95,7 +97,7 @@ cmds = [
   }
 ]
 
-buddy.invoke(cmds, function() {});
+scripty.invoke(cmds, function() {});
 ```
 
 When this runs, the following commands will be created.
