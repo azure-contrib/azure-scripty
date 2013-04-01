@@ -93,7 +93,7 @@ cmds = [
     positional: ['site1'],
     location: '"West US"',
     subscription: 'foobar'
-    git:null
+    git:true
   }
 ]
 
