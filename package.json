@@ -1,6 +1,6 @@
 {
   "name": "azure-scripty",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Azure automation made easy",
   "main": "lib/azure-scripty.js",
   "licenses": [
