@@ -3,8 +3,6 @@ azure-scripty
 
 Azure automation made easy. 
 
-https://travis-ci.org/WindowsAzure-Contrib/azure-scripty
-
 [![Build Status](https://travis-ci.org/WindowsAzure-Contrib/azure-scripty.png)](https://travis-ci.org/WindowsAzure-Contrib/azure-scripty)
 
 
