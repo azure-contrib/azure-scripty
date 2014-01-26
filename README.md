@@ -118,7 +118,7 @@ site create site1 --location "West US" --subscription foobar --git
 
 ## Multi-command with step callbacks
 
-An alternative style that is supported is to pass a collection of cmd objects with callbacks. Today this is useful for organizing you script into smaller functions. In the future this may allow you to do pre-processing and feed data to the next step based on the current result.
+An alternative style that is supported is to pass a collection of cmd objects with callbacks. This is useful for performing actions after a step like logging. You can do much more in the callback which will be covered in the section on piping under the topic "Custom logic, filters, and transformations"
 
 ```javascript
 var scripty = require('azure-scripty');
@@ -126,14 +126,17 @@ var steps={
   sites:function(callback,result) {
     //contains just sites
     console.log("sites\n" + result;
+    callback(undefined, result);
   },
   vms:function(callback,result) {
     //contains just vms
     console.log("vms\n" + result;
+    callback(undefined, result);
   }
   complete:function(err, results) {
     //contains both
     console.log("results\n" + results;
+    callback(undefined, result);
   }
 };
 var cmds=[
@@ -141,11 +144,11 @@ var cmds=[
   {cmd:'vm list', callback:steps.vms}
 ];
 scripty.invoke(cmds, steps.complete);
-````
+```
 
 This also works with command object style, so you can pass in a full command with a callback.
 
-## Declarative piping
+## Piping
 
 Scripty supports the ability to pipe results between commands. To pipe, the command having results piped in should contain substituion placeholders in the parameters. A placeholder is in the form of ':' + property name ex. ':Name'
 
@@ -157,7 +160,7 @@ For example in the example below the :Name property is specified for 'site stop'
 
 ```javascript
 var scripty = require('azure-scripty');
-scripty.invoke(['site list', 'site stop :Name'], function(){});
+scripty.invoke(['site list', 'site stop :name'], function(){});
 ```
 
 ### Piping single results
@@ -172,12 +175,51 @@ scripty.invoke(['sb namespace show myns', "site config add \"conn=':ConnectionSt
   function(){});
 ```
 
-# What's next
-* Add custom filtering for collections 
+### Custom logic, filters, and transformations ###
+scripty supports the ability to apply custom filtering logic with piping. We can modify the earlier site example to only stop web sites in "West US". To do this you simply filter the list of websites with custom logic in the callback for the step where the sites are returned. You can see this below.
+
+```javascript
+var scripty =  require('azure-scripty');
+var steps={
+  sites:function(callback,result) {
+    //apply a filter
+    var filtered = result.filter(function(item) {
+      return (item.webSpace === 'westuswebspace'); 
+    });
+    //return the filtered result
+    callback(undefined, filtered);
+  },
+  complete:function(err, result) {
+    console.log(result);
+  }
+};
+var cmds=[
+  {cmd:'site list', callback:steps.sites}
+  {cmd: 'site stop :name'}
+];
+scripty.invoke(cmds, steps.complete);
+```
+
+### Modifying the next command dynamically ###
+Additionally you can grab the next command in the chain and modify it dynamically. For example below the the sql server created with the first command will then be set as a positional argument for the next command.
+
+```javascript
+var cmds=[
+  {cmd:'mobile show clidemo', callback:onShow},
+  {cmd:'mobile create clidemo2'}
+];
+
+function onShow(callback, result, nextCommand) {
+  // do stuff with result
+ nextCommand.positional = [result.sqlServer]
+ callback(undefined, result);
+}
+
+scripty.invoke(cmds, function() { console.log('done'); } );
+```
 
 # Known issues
 
-* Some commands have required params which the cli will prompt for ex. 'azure site create' will prompt for location. If you call those cmds without passing required params the cli will prompt which causes scripty to freeze as the cli is expecting input. This will be addressed shortly so that cmd will error if this happens. To avoid this make sure all required params are passed. You can find out which params are required by using --help, i.e. "azure site create --help"
 * When using piping, parameters currently match case sensitively. Please make sure the names match exactly.
 
 # License
