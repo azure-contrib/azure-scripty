@@ -11,3 +11,8 @@
 - Azure-scripty no longer logs JSON response to console (fix #6)
 - Added working directory when executing commands (fix #5)
 - Results are no longer wrapped in an array for single values. (fix #4)
+
+*** 1.0 ***
+- Added support for overriding the output buffer (fix for #20)
+
+

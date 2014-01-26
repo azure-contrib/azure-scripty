@@ -34,6 +34,15 @@ scripty.invoke('site list', function(err, results) {
 });
 ````
 
+## Increasing the output buffer size
+
+By default scripty uses the standard default buffer size of 204800 bytes. This may be insufficent for some scenarios like listing out hundreds of blobs resulting an error indicating the buffer size is too small. For these cases you can increase the buffer size using by setting maxBuffer.
+
+```
+var scripty = require('azure-scripty');
+scripty.maxBuffer = 999999999;
+```
+
 ## Single command object style ##
 
 You can also pass a command object where properties map to different parameters. This is useful for programattic scenarios where a function returns an object that you just pass in.
