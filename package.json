@@ -29,9 +29,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/glennblock/azure-scripty.git"
+    "url": "git://github.com/windowsazure-contrib/azure-scripty.git"
   },
-  "homepage": "https://github.com/glennblock/azure-scripty",
+  "homepage": "https://github.com/windowsazure-contrib/azure-scripty",
   "keywords": [
     "azure",
     "cloud",
