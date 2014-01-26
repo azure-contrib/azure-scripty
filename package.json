@@ -1,6 +1,6 @@
 {
   "name": "azure-scripty",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Azure automation made easy",
   "main": "lib/azure-scripty.js",
   "licenses": [
@@ -11,14 +11,15 @@
   ],
   "dependencies": {
     "azure-cli": "latest",
-    "async": "~0.1.22",
-    "underscore": "~1.4.3"
+    "underscore": "~1.4.3",
+    "async": "~0.2.10",
   },
   "devDependencies": {
     "mocha": "*",
     "jshint": "*",
     "should": "*",
-    "coffee-script": "*"
+    "coffee-script": "*",
+    "underscore.string": "~2.3.3"
   },
   "directories": {
     "test": "test"
