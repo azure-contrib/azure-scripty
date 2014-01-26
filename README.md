@@ -200,8 +200,8 @@ var cmds=[
 scripty.invoke(cmds, steps.complete);
 ```
 
-### Modifying the next command dynamically ###
-Additionally you can grab the next command in the chain and modify it dynamically. For example below the the sql server created with the first command will then be set as a positional argument for the next command.
+### Accessing the next command / modifying it dynamically ###
+Additionally you can grab the next command in the chain and modify it dynamically. To do this add a callback for the command that has a 3rd parameter for the next command. When scripty executes it will pass in the next command which can be inspected or modified. For example below the the sql server created with the first command will then be set as a positional argument for the next command.
 
 ```javascript
 var cmds=[
