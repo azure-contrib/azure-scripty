@@ -13,6 +13,8 @@
 - Results are no longer wrapped in an array for single values. (fix #4)
 
 *** 1.0 ***
-- Added support for overriding the output buffer (fix for #20)
+- Added overriding the output buffer (fix for #20)
+- Added support for applying custom fitlering
+- Added the ability to access and modify the next comment (fix for #3)
 
 
