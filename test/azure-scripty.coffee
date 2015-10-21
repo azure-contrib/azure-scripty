@@ -15,7 +15,7 @@ scripty.exec = (cmd, callback) ->
   calls++;
   receivedCmds.push(cmd);
   if expectedCmds.length > 0
-    cmd.should.include expectedCmds.pop()
+    cmd.should.containEql expectedCmds.pop()
   callback errors.pop(), results.pop()
   
 describe 'scripty', ->
