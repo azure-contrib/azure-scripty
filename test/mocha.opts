@@ -1,2 +1,2 @@
---compilers coffee:coffee-script
+--compilers mocha --compilers coffee:coffee-script/register
 --reporter spec
